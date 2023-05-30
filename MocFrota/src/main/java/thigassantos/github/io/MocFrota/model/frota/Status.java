@@ -11,7 +11,6 @@ import thigassantos.github.io.MocFrota.model.frota.dto.StatusRequestDTO;
 @Table(name = "status")
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
 public class Status {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,5 +40,19 @@ public class Status {
         this.pneu = data.pneu();
         this.estepe = data.estepe();
         this.freio = data.freio();
+    }
+
+    public Status() {
+        status = "Disponível";
+        km = 0;
+        combustivel = 100;
+        farol = true;
+        luzFreio = true;
+        luzRe = true;
+        placa = true;
+        limpador = true;
+        pneu = true;
+        estepe = true;
+        freio = true;
     }
 }

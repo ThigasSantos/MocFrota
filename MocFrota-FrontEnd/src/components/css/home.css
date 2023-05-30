@@ -206,3 +206,11 @@ button {
     margin-bottom: 0;
     font-weight: bold;
 }
+
+.card-grip{
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-gap: 3vw;
+  padding: 10px;
+  text-decoration: none;
+}

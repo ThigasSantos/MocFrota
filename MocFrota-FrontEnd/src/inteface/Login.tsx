@@ -1,4 +1,4 @@
-import {Link, useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import {postData } from "../../src/hooks/useLoginData";
 import { useState } from 'react';
 
@@ -18,7 +18,7 @@ export function Login(){
 
     const submit = async() =>{
      const ret = await postData({email, password});
-      navigate("/home");
+     ret.status == 200?navigate("/home") : alert('Login ou senha incorretos');
      
     }
 

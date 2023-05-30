@@ -1,14 +1,25 @@
+import { useNavigate } from 'react-router-dom';
 import './card.css'
 
 interface CardProps{
-    title: string,
+    placa: string
 }
 
-export function Card({title} : CardProps){
+export function Card({placa} : CardProps){
+    const navigate = useNavigate();
+
+    const submit = async({placa}: CardProps) =>{
+        navigate('/editarveiculo/'+placa);
+    }
+
     return(
-        <div className="card">
-            <h2>{title}</h2>
-            <p><b>Valor:</b></p>
-        </div>
+        <button className="buttonPlaca" onClick={()=>submit({placa})}>
+            <div className="gfc-license-plate">
+                <div className='header'>BRASIL</div>
+                <div className='content'>{placa}</div>       
+            </div>
+        </button>
     )
 }
+
+export default Card;

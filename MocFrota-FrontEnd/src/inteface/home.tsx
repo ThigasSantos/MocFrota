@@ -23,7 +23,7 @@ const handleOpenModal = (id: number) => {
 <h2><strong>Funções<span>( 3 )</span></strong></h2>
 
 <div className="cards">
-    {isModalOpen1 && <CreateModal urlCad="/cadastrousuario" urlEdit=""/>}
+    {isModalOpen1 && <CreateModal urlCad="/cadastroveiculo" urlEdit="/listarveiculo"/>}
     <button onClick={()=>handleOpenModal(1)}>
 
         <figure className="card">

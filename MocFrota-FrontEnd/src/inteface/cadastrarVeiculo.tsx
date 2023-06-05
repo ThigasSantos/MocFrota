@@ -94,7 +94,7 @@ export function cadastrarVeiculo() {
               </select> 
             </fieldset>
            
-            <button type="submit" className="btnSubmit" onClick={submit}>Cadastrar</button>
+            <button type="button" className="btnSubmit" onClick={submit}>Cadastrar</button>
             
             </form>
             </div>

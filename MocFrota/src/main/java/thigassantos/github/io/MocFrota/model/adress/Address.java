@@ -23,7 +23,4 @@ public class Address {
         private String numero;
         private String complemento;
 
-        @ManyToOne(optional = false)
-        private Company companies;
-
 }

@@ -3,7 +3,7 @@ package thigassantos.github.io.MocFrota;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import thigassantos.github.io.MocFrota.controller.FrotaController;
-import thigassantos.github.io.MocFrota.controller.UserController;
+import thigassantos.github.io.MocFrota.controller.LoginController;
 import thigassantos.github.io.MocFrota.model.frota.Status;
 import thigassantos.github.io.MocFrota.model.frota.dto.StatusRequestDTO;
 import thigassantos.github.io.MocFrota.model.frota.dto.VeiculoRequestDTO;
@@ -12,12 +12,12 @@ import thigassantos.github.io.MocFrota.model.user.dto.UserRequestDTO;
 @Component
 public class PreencherBanco {
     private FrotaController frotaController;
-    private UserController userController;
+    private LoginController loginController;
 
     @Autowired
-    public PreencherBanco(FrotaController frotaController,UserController userController){
+    public PreencherBanco(FrotaController frotaController, LoginController loginController){
         this.frotaController = frotaController;
-        this.userController = userController;
+        this.loginController = loginController;
     }
 
     public void preencheBanco(){
@@ -40,8 +40,8 @@ public class PreencherBanco {
         UserRequestDTO user1 = new UserRequestDTO("Thiago","aaaaa","123456","gerente");
         UserRequestDTO user2 = new UserRequestDTO("Emilly","bbbbb","123456","condutor");
 
-        userController.saveUser(user1);
-        userController.saveUser(user2);
+        loginController.saveUser(user1);
+        loginController.saveUser(user2);
 
     }
 }

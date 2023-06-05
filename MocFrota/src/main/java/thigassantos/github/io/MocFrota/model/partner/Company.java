@@ -21,7 +21,7 @@ public class Company {
     private String name;
     private String telefone;
     private String email;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "companies")
-    private List<Address> addresses;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Address address;
     private String status;
 }

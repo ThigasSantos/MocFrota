@@ -6,7 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import thigassantos.github.io.MocFrota.model.adress.Address;
-import thigassantos.github.io.MocFrota.model.user.User;
+import thigassantos.github.io.MocFrota.model.user.Pessoa;
+import thigassantos.github.io.MocFrota.model.user.specify.dto.CondutorRequestDTO;
 
 @Entity(name = "condutor")
 @Table(name = "condutor")
@@ -14,11 +15,19 @@ import thigassantos.github.io.MocFrota.model.user.User;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Condutor extends User {
+public class Condutor extends Pessoa {
 
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String cnh;
-    private String cpf;
-    private String telefone;
-    @OneToOne(cascade = CascadeType.ALL)
-    private Address address;
+
+    public Condutor(CondutorRequestDTO data) {
+        this.setName(data.name());
+        this.setCpf(data.cpf());
+        this.setRole(data.role());
+        this.setTelefone(data.telefone());
+        this.setAddress(new Address(data.address()));
+        this.setCnh(data.cnh());
+    }
+
 }

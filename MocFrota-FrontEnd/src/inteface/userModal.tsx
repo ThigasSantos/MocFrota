@@ -5,11 +5,13 @@ import { postCondutorData, postGerenteData } from "../hooks/useUserData";
 
 
 interface UserModalProps {
+    name: string;
     role: string;
+    id: number;
 }
 
 
-export function UserModal({role} : UserModalProps) {
+export function UserModal({name,role,id} : UserModalProps) {
 
   const navigate = useNavigate();
 
@@ -24,7 +26,6 @@ export function UserModal({role} : UserModalProps) {
     const [estado, setEstado] = useState('');
     const [numero, setNumero] = useState('');
     const [complemento, setComplemento] = useState('');
-
 
     const handleInputCPF = (event: any) => {
         setCPF(event.target.value);
@@ -59,11 +60,11 @@ export function UserModal({role} : UserModalProps) {
 
     const submit = async() =>{
         if(role == "Condutor"){
-            const ret = await postCondutorData({cnh, cpf, telefone,adress:{cep, logradouro, bairro, cidade, estado, numero, complemento}});
+            const ret = await postCondutorData({name, cnh, cpf, role, telefone,address:{cep, logradouro, bairro, cidade, estado, numero, complemento},id});
             ret.status == 200?navigate("/home"):alert('Erro ao cadastrar condutor');
         }
         else{
-            const ret = await postGerenteData({cpf, telefone,adress:{cep, logradouro, bairro, cidade, estado, numero, complemento}});
+            const ret = await postGerenteData({name, cpf, role, telefone,address:{cep, logradouro, bairro, cidade, estado, numero, complemento},id});
             ret.status == 200?navigate("/home"):alert('Erro ao cadastrar gerente');
         }
     }

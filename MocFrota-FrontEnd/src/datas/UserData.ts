@@ -1,22 +1,35 @@
-import { AdressData } from "./Adress";
+import { AddressData } from "./Adress";
 
 export interface UserData{
-    nome: string;
+    name: string;
     email: string;
-    senha: string;
+    password: string;
     role: string;
 }
 
 export interface UserDataGerente{
+    name: string;
     cpf: string;
+    role: string;
     telefone: string;
-    adress: AdressData;
+    address: AddressData;
+    id: number;
 }
 
 
 export interface UserDataCondutor{
+    name: string;
     cnh: string;
     cpf: string;
+    role: string;
     telefone: string;
-    adress: AdressData;
+    address: AddressData;
+    id: number;
 }
+
+export interface UserDataAll{
+    name: string;
+    cpf: string;
+    role: string;
+}
+

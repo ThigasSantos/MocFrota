@@ -33,7 +33,7 @@ const handleOpenModal = (id: number) => {
         
     </button>
     
-    {isModalOpen2 && <CreateModal urlCad="/cadastrousuario" urlEdit=""/>}
+    {isModalOpen2 && <CreateModal urlCad="/cadastrousuario" urlEdit="/listarusers"/>}
     <button onClick={()=>handleOpenModal(2)}>
 
         <figure className="card">

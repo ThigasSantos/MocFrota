@@ -1,0 +1,22 @@
+
+.border{
+    background-color: #614e4e;
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+
+}
+
+.header{
+    font-style: uppercase;
+    font-size: 3vh;
+}
+
+.buttonUser{
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font-size: 2vh;
+    padding: 10px;
+    cursor: pointer;
+    align-items: center;
+}

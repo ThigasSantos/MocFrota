@@ -8,13 +8,13 @@ export function cadastrarVeiculo() {
 
   const navigate = useNavigate();
 
-  const [placa, setPlaca] = useState(null);
-  const [modelo, setModelo] = useState(null);
+  const [placa, setPlaca] = useState('');
+  const [modelo, setModelo] = useState('');
   const [marca, setMarca] = useState('');
   const [cor, setCor] = useState('');
   const [ano, setAno] = useState(0);
   const [chassi, setChassi] = useState('');
-  const [renavam, setRenavam] = useState(null);
+  const [renavam, setRenavam] = useState('');
   const [tipo, setTipo] = useState('');
 
   const handleInputPlaca = (event: any) => {
@@ -43,8 +43,12 @@ export function cadastrarVeiculo() {
   };
 
   const submit = async() =>{
-    const ret = await postVeiculoData({placa, modelo, marca, cor, ano, chassi, renavam, tipo});
-    ret.status == 200?navigate("/home"):alert('Erro ao cadastrar veiculo');
+    let res:any;
+    try{res = await postVeiculoData({placa, modelo, marca, cor, ano, chassi, renavam, tipo});
+     }catch(error){
+      alert("Erro ao cadastrar usuario");
+     }
+    res.status == 200?navigate("/home"):alert('Erro ao cadastrar veiculo');
    }
 
 

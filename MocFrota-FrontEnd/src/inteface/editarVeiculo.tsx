@@ -74,7 +74,7 @@ export function editarVeiculo() {
           <body className="cadast-body">
               <div className="row">
               <div className="col-md-12">
-              <form action="index.html" method="post" className="formCad-User">
+              <form className="formCad-User">
               <h1 className="cadast-title"> Veiculo </h1>
               
               <fieldset className="campos">
@@ -82,7 +82,7 @@ export function editarVeiculo() {
                 <legend><span className="number">1</span> Informações Basicas</legend>
               
                 <label htmlFor="placa">Placa:</label>
-                <input type="text" id="name" name="vei_placa" value={placa} onChange={handleInputPlaca} required />  
+                <input type="text" id="name" name="vei_placa" value={placa} onChange={handleInputPlaca} disabled />  
               
                 <label htmlFor="modelo">Modelo:</label>
                 <input type="text" id="mail" name="vei_modelo" value={modelo} onChange={handleInputModelo} required/>

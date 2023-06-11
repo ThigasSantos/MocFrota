@@ -4,20 +4,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import thigassantos.github.io.MocFrota.controller.FrotaController;
 import thigassantos.github.io.MocFrota.controller.LoginController;
+import thigassantos.github.io.MocFrota.controller.UserController;
+import thigassantos.github.io.MocFrota.model.adress.dto.AddressRequestDTO;
 import thigassantos.github.io.MocFrota.model.frota.Status;
 import thigassantos.github.io.MocFrota.model.frota.dto.StatusRequestDTO;
 import thigassantos.github.io.MocFrota.model.frota.dto.VeiculoRequestDTO;
 import thigassantos.github.io.MocFrota.model.user.dto.UserRequestDTO;
+import thigassantos.github.io.MocFrota.model.user.specify.dto.GerenteRequestDTO;
 
 @Component
 public class PreencherBanco {
     private FrotaController frotaController;
     private LoginController loginController;
+    private UserController userController;
 
     @Autowired
-    public PreencherBanco(FrotaController frotaController, LoginController loginController){
+    public PreencherBanco(FrotaController frotaController, LoginController loginController, UserController userController) {
         this.frotaController = frotaController;
         this.loginController = loginController;
+        this.userController = userController;
     }
 
     public void preencheBanco(){
@@ -42,6 +47,11 @@ public class PreencherBanco {
 
         loginController.saveUser(user1);
         loginController.saveUser(user2);
+
+        AddressRequestDTO address1 = new AddressRequestDTO("39400-000", "Rua 1", "Bairro 1", "Cidade 1", "Estado 1","12","sem complemento");
+        GerenteRequestDTO gerente1 = new GerenteRequestDTO("Thiago", "123.456.789-10", "gerente", "123456789", address1, 1L);
+
+        userController.saveGerente(gerente1);
 
     }
 }

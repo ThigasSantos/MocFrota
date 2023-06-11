@@ -2,7 +2,8 @@ package thigassantos.github.io.MocFrota.model.adress;
 
 import jakarta.persistence.*;
 import lombok.*;
-import thigassantos.github.io.MocFrota.model.partner.Company;
+import thigassantos.github.io.MocFrota.model.adress.dto.AddressDTO;
+import thigassantos.github.io.MocFrota.model.adress.dto.AddressRequestDTO;
 
 @Getter
 @Setter
@@ -23,4 +24,23 @@ public class Address {
         private String numero;
         private String complemento;
 
+        public Address(AddressRequestDTO data) {
+                this.cep = data.cep();
+                this.logradouro = data.logradouro();
+                this.bairro = data.bairro();
+                this.cidade = data.cidade();
+                this.estado = data.estado();
+                this.numero = data.numero();
+                this.complemento = data.complemento();
+        }
+
+        public Address(AddressDTO data) {
+                this.cep = data.cep();
+                this.logradouro = data.logradouro();
+                this.bairro = data.bairro();
+                this.cidade = data.cidade();
+                this.estado = data.estado();
+                this.numero = data.numero();
+                this.complemento = data.complemento();
+        }
 }

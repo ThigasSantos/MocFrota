@@ -43,7 +43,7 @@ const handleOpenModal = (id: number) => {
 
     </button>
 
-    {isModalOpen3 && <CreateModal urlCad="" urlEdit=""/>}
+    {isModalOpen3 && <CreateModal urlCad="/cadastroempresa" urlEdit="/listarempresas"/>}
     <button onClick={()=>handleOpenModal(3)}>
         <figure className="card">
         <img src="https://i.pinimg.com/originals/6b/7f/48/6b7f48367fd42e6cbc05e3637cbbeba3.png" />

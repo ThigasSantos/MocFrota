@@ -10,4 +10,5 @@ import thigassantos.github.io.MocFrota.model.partner.Company;
 @EnableJpaRepositories
 @Repository
 public interface CompanyRepository extends JpaRepository<Company, Long> {
+    Company findByCnpj(String cnpj);
 }

@@ -11,6 +11,17 @@ interface CpfProps{
     cpf: string
 }
 
+interface ListPropsV{
+    cnpj: string
+    name: string
+    telefone: string
+    status: string
+}
+
+interface CnpjProps{
+    cnpj: string
+}
+
 export function ListU({name, cpf, role} : ListProps){
     const navigate = useNavigate();
 
@@ -30,4 +41,20 @@ export function ListU({name, cpf, role} : ListProps){
     )
 }
 
-export default ListU;
+export function ListV({cnpj, name, telefone, status} : ListPropsV){
+    const navigate = useNavigate();
+
+    const submit = async({cnpj}: CnpjProps) =>{
+        navigate('/editarempresa/'+cnpj);
+    }
+
+    return( <div className="border"> 
+    <button className="buttonUser" onClick={()=>submit({cnpj})}>
+        <div className='header'>{status.toUpperCase()}</div>
+        <div className="list-users">
+            <div className='content'>Nome: {name}  Telefone: {telefone}</div>       
+        </div>
+    </button>
+    </div>  )  
+}
+

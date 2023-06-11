@@ -33,3 +33,12 @@ export interface UserDataAll{
     role: string;
 }
 
+export interface UserDataPessoa{
+    name: string;
+    cpf: string;
+    role: string;
+    telefone: string;
+    address: AddressData;
+    user: UserData;
+}
+

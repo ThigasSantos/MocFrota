@@ -2,7 +2,7 @@ import { useState } from "react";
 import "../../src/components/css/cadastrarUser.css"
 import { getPessoa, getUsersData, postUserLoginData } from "../hooks/useUserData";
 import UserModal from "./userModal";
-import ListU from "../components/list/list";
+import {ListU} from "../components/list/list";
 import { useParams } from "react-router-dom";
 
 

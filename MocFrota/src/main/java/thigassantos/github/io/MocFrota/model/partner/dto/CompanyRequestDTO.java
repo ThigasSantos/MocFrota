@@ -1,8 +1,7 @@
 package thigassantos.github.io.MocFrota.model.partner.dto;
 
 import thigassantos.github.io.MocFrota.model.adress.Address;
+import thigassantos.github.io.MocFrota.model.adress.dto.AddressRequestDTO;
 
-import java.util.List;
-
-public record CompanyRequestDTO(String cnpj, String name, String telefone, String email, Address address, String status) {
+public record CompanyRequestDTO(String cnpj, String name, String telefone, String email, AddressRequestDTO address, String status) {
 }

@@ -3,8 +3,7 @@ package thigassantos.github.io.MocFrota.model.partner;
 import jakarta.persistence.*;
 import lombok.*;
 import thigassantos.github.io.MocFrota.model.adress.Address;
-
-import java.util.List;
+import thigassantos.github.io.MocFrota.model.partner.dto.CompanyRequestDTO;
 
 @Entity(name = "company")
 @Table(name = "company")
@@ -24,4 +23,13 @@ public class Company {
     @OneToOne(cascade = CascadeType.ALL)
     private Address address;
     private String status;
+
+    public Company(CompanyRequestDTO data) {
+        this.cnpj = data.cnpj();
+        this.name = data.name();
+        this.telefone = data.telefone();
+        this.email = data.email();
+        this.setAddress(new Address(data.address()));
+        this.status = data.status();
+    }
 }

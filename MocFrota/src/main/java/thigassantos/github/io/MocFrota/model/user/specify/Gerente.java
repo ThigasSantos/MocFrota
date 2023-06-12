@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import thigassantos.github.io.MocFrota.model.adress.Address;
 import thigassantos.github.io.MocFrota.model.user.Pessoa;
+import thigassantos.github.io.MocFrota.model.user.User;
 import thigassantos.github.io.MocFrota.model.user.specify.dto.GerenteRequestDTO;
 
 @Table(name = "gerente")
@@ -25,6 +26,7 @@ public class Gerente extends Pessoa {
                 this.setCpf(data.cpf());
                 this.setRole(data.role());
                 this.setTelefone(data.telefone());
+                this.setUser(new User(data.user()));
                 this.setAddress(new Address(data.address()));
         }
 }

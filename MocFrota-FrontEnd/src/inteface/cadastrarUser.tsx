@@ -1,9 +1,9 @@
 import { useState } from "react";
 import "../../src/components/css/cadastrarUser.css"
-import { getPessoa, getUsersData, postUserLoginData } from "../hooks/useUserData";
+import { getPessoa, getUsersData, postAtualizarPessoaData, postExcluirPessoa } from "../hooks/useUserData";
 import UserModal from "./userModal";
 import {ListU} from "../components/list/list";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 
 export function cadastrarUser() {
@@ -32,23 +32,10 @@ export function cadastrarUser() {
         setIsModaOpen((prev: any) => !prev);
     };
 
-    const [data, setData] = useState({id:-1});
-
     const submit = async() =>{
-        let res:any;
-        try{res = await postUserLoginData({name, email, password, role});
-        }catch(err){
-            alert("Erro ao cadastrar usuario");
-        }
-
-        if(res.status === 200){
-            setData(res.data);
-            handleOpenModal();
-        }else{
-            alert("Erro ao cadastrar usuario");
-        }
         
-        }
+       handleOpenModal();
+    }
 
 
     return (
@@ -81,7 +68,7 @@ export function cadastrarUser() {
             </fieldset>
            
             <button type="button" className="btnSubmit" onClick={submit}>Prossegir</button>
-            {isModalOpen && <UserModal name={name} role = {role} id = {data.id}/>}
+            {isModalOpen && <UserModal name={name} email={email} password={password} role = {role}/>}
             
             </form>
             </div>
@@ -105,6 +92,8 @@ export function listarUsers(){
 }
 
 export function editarUser(){
+
+    const navigate = useNavigate();
 
     const{cpf:id} = useParams();
 
@@ -174,18 +163,30 @@ export function editarUser(){
 
     const submit = async() =>{
         let res:any;
-        try{res = await postUserLoginData({name, email, password, role});
+        try{res = await postAtualizarPessoaData({name, cpf, role, telefone,address:{cep, logradouro, bairro, cidade, estado, numero, complemento},user:{name,email,password,role}});
         }catch(err){
-            alert("Erro ao cadastrar usuario");
-        }
+            alert("Erro ao atualizar usuario");
+            }
+            if(res.status === 200){
+                alert("Usuario atualizado com sucesso");
+                navigate("/listarusers");
+            }else{
+                alert("Erro ao atualizar usuario");
+            }
+    }
 
-        if(res.status === 200){
-            
-        }else{
-            alert("Erro ao cadastrar usuario");
-        }
-        
-        }
+    const excluir = async() =>{
+        let res:any;
+            try{res = await postExcluirPessoa({name, cpf, role, telefone,address:{cep, logradouro, bairro, cidade, estado, numero, complemento},user:{name,email,password,role}});
+            }catch(err){
+                alert("Erro ao exlcuir usuario");
+            }
+            if(res.status === 200){
+                alert("Usuario excluido com sucesso");
+                navigate("/listarusers");
+            }else{
+                alert("Erro ao excluir usuario");} 
+    }
 
 
     return (
@@ -204,10 +205,10 @@ export function editarUser(){
               <input type="text" id="name" name="user_nome" value={name} onChange={handleInputNome} required />  
             
               <label htmlFor="email">Email:</label>
-              <input type="text" id="mail" name="user_email" value={email} onChange={handleInputEmail} required/>
+              <input type="text" id="mail" name="user_email" value={email} onChange={handleInputEmail} disabled/>
            
               <label htmlFor="pass">Senha:</label>
-              <input type="text" id="password"  name="user_pass" value={password} onChange={handleInputSenha} required/>
+              <input type="password" id="password"  name="user_pass" value={password} onChange={handleInputSenha} required/>
 
               <label htmlFor="tipo">Tipo:</label>
               <select id="tipo" name="vei_tipo" value={role} onChange={handleInputRole}>
@@ -223,11 +224,11 @@ export function editarUser(){
               <legend><span className="number">2</span> Informações do Usuario</legend>
             
               <label htmlFor="cpf">CPF:</label>
-              <input type="text" id="name" name="user_cpf" value={cpf} onChange={handleInputCPF} required />  
+              <input type="text" id="name" name="user_cpf" value={cpf} onChange={handleInputCPF} disabled />  
             
             {(role == "Condutor")&&
                 (<> <label htmlFor="cnh">CNH:</label>
-                <input type="text" id="cnh" name="user_cnh" value={cnh} onChange={handleInputCnh} required/> 
+                <input type="text" id="cnh" name="user_cnh" value={cnh} onChange={handleInputCnh} disabled/> 
                 </>)
             }
               <label htmlFor="telefone">Telefone:</label>
@@ -256,8 +257,8 @@ export function editarUser(){
 
             </fieldset>
            
-            <button type="button" className="btnSubmit" onClick={submit}>Cadastrar</button>
-            
+            <button type="button" className="btnSubmit" onClick={submit}>Salvar</button>
+            <button type="button" className="btnSubmit" onClick={excluir}>Deletar</button>
             </form>
             
             </form>

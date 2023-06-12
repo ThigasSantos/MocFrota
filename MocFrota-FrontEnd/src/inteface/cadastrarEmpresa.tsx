@@ -235,13 +235,13 @@ export function editarEmpresa(){
         let res:any;
             try{res = await postExcluirEmpresa({cnpj, name, email, status, telefone, address:{cep, logradouro, bairro, cidade, estado, numero, complemento}});
             }catch(err){
-                alert("Erro ao cadastrar usuario");
+                alert("Erro ao excluir empresa");
             }
             if(res.status === 200){
-                alert("Usuario atualizado com sucesso");
+                alert("Empresa excluida com sucesso");
                 navigate("/listarempresas");
             }else{
-                alert("Erro ao cadastrar usuario");} 
+                alert("Erro ao excluir empresa");}  
     }
 
 

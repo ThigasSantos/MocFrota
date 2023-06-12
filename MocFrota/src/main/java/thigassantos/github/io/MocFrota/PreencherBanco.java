@@ -10,6 +10,7 @@ import thigassantos.github.io.MocFrota.model.frota.Status;
 import thigassantos.github.io.MocFrota.model.frota.dto.StatusRequestDTO;
 import thigassantos.github.io.MocFrota.model.frota.dto.VeiculoRequestDTO;
 import thigassantos.github.io.MocFrota.model.user.dto.UserRequestDTO;
+import thigassantos.github.io.MocFrota.model.user.specify.dto.CondutorRequestDTO;
 import thigassantos.github.io.MocFrota.model.user.specify.dto.GerenteRequestDTO;
 
 @Component
@@ -42,16 +43,17 @@ public class PreencherBanco {
         frotaController.saveVeiculo(veiculo3);
         frotaController.saveVeiculo(veiculo4);
 
-        UserRequestDTO user1 = new UserRequestDTO("Thiago","aaaaa","123456","gerente");
-        UserRequestDTO user2 = new UserRequestDTO("Emilly","bbbbb","123456","condutor");
-
-        loginController.saveUser(user1);
-        loginController.saveUser(user2);
+        UserRequestDTO user1 = new UserRequestDTO("Thiago","aaaaa","123456","Gerente");
+        UserRequestDTO user2 = new UserRequestDTO("Emilly","bbbbb","123456","Condutor");
 
         AddressRequestDTO address1 = new AddressRequestDTO("39400-000", "Rua 1", "Bairro 1", "Cidade 1", "Estado 1","12","sem complemento");
-        GerenteRequestDTO gerente1 = new GerenteRequestDTO("Thiago", "123.456.789-10", "gerente", "123456789", address1, 1L);
+        GerenteRequestDTO gerente = new GerenteRequestDTO("Thiago", "123.456.789-10", "gerente", "123456789", address1, user1);
 
-        userController.saveGerente(gerente1);
+        AddressRequestDTO address2 = new AddressRequestDTO("39400-000", "Rua 2", "Bairro 2", "Cidade 2", "Estado 2","12","sem complemento");
+        CondutorRequestDTO condutor = new CondutorRequestDTO("Emilly", "1242321312", "123.456.789-00", "condutor", "123456789", address2, user2);
+
+        userController.saveGerente(gerente);
+        userController.saveCondutor(condutor);
 
     }
 }

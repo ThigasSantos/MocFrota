@@ -6,12 +6,13 @@ import { postCondutorData, postGerenteData } from "../hooks/useUserData";
 
 interface UserModalProps {
     name: string;
+    email: string;
+    password: string;
     role: string;
-    id: number;
 }
 
 
-export function UserModal({name,role,id} : UserModalProps) {
+export function UserModal({name,role,email,password} : UserModalProps) {
 
   const navigate = useNavigate();
 
@@ -60,11 +61,11 @@ export function UserModal({name,role,id} : UserModalProps) {
 
     const submit = async() =>{
         if(role == "Condutor"){
-            const ret = await postCondutorData({name, cnh, cpf, role, telefone,address:{cep, logradouro, bairro, cidade, estado, numero, complemento},id});
+            const ret = await postCondutorData({name, cnh, cpf, role, telefone,address:{cep, logradouro, bairro, cidade, estado, numero, complemento},user:{name,email,password,role}});
             ret.status == 200?navigate("/home"):alert('Erro ao cadastrar condutor');
         }
         else{
-            const ret = await postGerenteData({name, cpf, role, telefone,address:{cep, logradouro, bairro, cidade, estado, numero, complemento},id});
+            const ret = await postGerenteData({name, cpf, role, telefone,address:{cep, logradouro, bairro, cidade, estado, numero, complemento},user:{name,email,password,role}});
             ret.status == 200?navigate("/home"):alert('Erro ao cadastrar gerente');
         }
     }

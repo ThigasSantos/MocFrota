@@ -6,6 +6,8 @@ import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import thigassantos.github.io.MocFrota.model.user.dto.UserDTO;
 import thigassantos.github.io.MocFrota.model.user.dto.UserRequestDTO;
 
 import java.util.Collection;
@@ -27,11 +29,22 @@ public class User implements UserDetails {
     private String password;
     private String role;
 
+    private BCryptPasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
+    }
+
     public User(UserRequestDTO data){
         this.name = data.name();
         this.email = data.email();
-        this.password = data.password();
+        this.password = (passwordEncoder().encode(data.password()));
         this.role = data.role();
+    }
+
+    public User(UserDTO user) {
+        this.name = user.name();
+        this.email = user.email();
+        this.role = user.role();
+        this.password = (passwordEncoder().encode(user.password()));
     }
 
     @Override

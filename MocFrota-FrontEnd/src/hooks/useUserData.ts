@@ -1,13 +1,8 @@
 import axios, { AxiosError, AxiosPromise, AxiosResponse} from "axios";
-import { UserData, UserDataAll, UserDataCondutor, UserDataGerente, UserDataPessoa } from "../datas/UserData";
+import { UserDataAll, UserDataCondutor, UserDataGerente, UserDataPessoa } from "../datas/UserData";
 import { useQuery } from "@tanstack/react-query";
 
 const API_URL = 'http://localhost:8080'
-
-export const postUserLoginData = async (data: UserData): AxiosPromise<any> => {
-    const response = axios.post(API_URL + '/user/cadastrar', data)
-    return response;
-}
 
 export const postCondutorData = async (data: UserDataCondutor): AxiosPromise<any> => {
     const response = axios.post(API_URL + '/user/cadastrar/condutor', data)
@@ -47,4 +42,14 @@ export function getPessoa(cpf: string) {
     );
         
     return { ...query}.data;
+}
+
+export const postAtualizarPessoaData = async (data: UserDataPessoa): AxiosPromise<any> => {
+    const response = axios.post(API_URL + '/user/update', data)
+    return response;
+}
+
+export const postExcluirPessoa = async (data: UserDataPessoa): AxiosPromise<any> => {
+    const response = axios.post(API_URL + '/user/delete', data)
+    return response;
 }

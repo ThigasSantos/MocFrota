@@ -13,7 +13,7 @@ export interface UserDataGerente{
     role: string;
     telefone: string;
     address: AddressData;
-    id: number;
+    user: UserData;
 }
 
 
@@ -24,7 +24,7 @@ export interface UserDataCondutor{
     role: string;
     telefone: string;
     address: AddressData;
-    id: number;
+    user: UserData;
 }
 
 export interface UserDataAll{

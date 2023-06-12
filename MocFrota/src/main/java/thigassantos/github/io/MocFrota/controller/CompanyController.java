@@ -7,6 +7,7 @@ import thigassantos.github.io.MocFrota.model.adress.Address;
 import thigassantos.github.io.MocFrota.model.partner.Company;
 import thigassantos.github.io.MocFrota.model.partner.dto.CompanyDTO;
 import thigassantos.github.io.MocFrota.model.partner.dto.CompanyRequestDTO;
+import thigassantos.github.io.MocFrota.repository.AddressRepository;
 import thigassantos.github.io.MocFrota.repository.CompanyRepository;
 
 import java.util.List;
@@ -17,6 +18,8 @@ public class CompanyController {
 
     @Autowired
     private CompanyRepository companyRepository;
+    @Autowired
+    private AddressRepository addressRepository;
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping
@@ -36,9 +39,18 @@ public class CompanyController {
         companyData.setName(data.name());
         companyData.setEmail(data.email());
         companyData.setTelefone(data.telefone());
-        Address address = new Address(data.address());
-        companyData.setAddress(address);
+
+        Address address = addressRepository.findById(companyData.getAddress().getId()).get();
+        address.setCep(data.address().cep());
+        address.setLogradouro(data.address().logradouro());
+        address.setBairro(data.address().bairro());
+        address.setCidade(data.address().cidade());
+        address.setEstado(data.address().estado());
+        address.setNumero(data.address().numero());
+        address.setComplemento(data.address().complemento());
+        addressRepository.save(address);
         companyData.setStatus(data.status());
+
         companyRepository.save(companyData);
         return ResponseEntity.ok().build();
     }

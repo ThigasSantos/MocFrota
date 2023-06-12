@@ -16,12 +16,13 @@ public class Pessoa {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    @Column(unique = true)
     private String cpf;
     private String role;
     private String telefone;
     @OneToOne(cascade = CascadeType.ALL)
     private Address address;
-    @OneToOne(cascade = CascadeType.REMOVE)
+    @OneToOne(cascade = CascadeType.ALL)
     private User user;
 
 }

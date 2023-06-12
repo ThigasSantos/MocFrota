@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import thigassantos.github.io.MocFrota.model.adress.Address;
 import thigassantos.github.io.MocFrota.model.user.Pessoa;
+import thigassantos.github.io.MocFrota.model.user.User;
 import thigassantos.github.io.MocFrota.model.user.specify.dto.CondutorRequestDTO;
 
 @Entity(name = "condutor")
@@ -27,6 +28,7 @@ public class Condutor extends Pessoa {
         this.setRole(data.role());
         this.setTelefone(data.telefone());
         this.setAddress(new Address(data.address()));
+        this.setUser(new User(data.user()));
         this.setCnh(data.cnh());
     }
 

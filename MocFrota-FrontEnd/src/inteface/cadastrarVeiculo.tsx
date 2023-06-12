@@ -46,9 +46,14 @@ export function cadastrarVeiculo() {
     let res:any;
     try{res = await postVeiculoData({placa, modelo, marca, cor, ano, chassi, renavam, tipo});
      }catch(error){
-      alert("Erro ao cadastrar usuario");
+      alert("Erro ao cadastrar veiculo");
      }
-    res.status == 200?navigate("/home"):alert('Erro ao cadastrar veiculo');
+      if(res.status === 200){
+          alert("Veiculo cadastrado com sucesso");
+          navigate("/home");
+      }else{
+          alert("Erro ao cadastrar veiculo");
+      }
    }
 
 

@@ -60,13 +60,30 @@ export function UserModal({name,role,email,password} : UserModalProps) {
     };
 
     const submit = async() =>{
+        let res:any;
         if(role == "Condutor"){
-            const ret = await postCondutorData({name, cnh, cpf, role, telefone,address:{cep, logradouro, bairro, cidade, estado, numero, complemento},user:{name,email,password,role}});
-            ret.status == 200?navigate("/home"):alert('Erro ao cadastrar condutor');
+        try{res = await postCondutorData({name, cnh, cpf, role, telefone,address:{cep, logradouro, bairro, cidade, estado, numero, complemento},user:{name,email,password,role}});
+        }catch(err){
+            alert("Erro ao cadastrar condutor");
+            }
+            if(res.status === 200){
+                alert("Condutor cadastrado com sucesso");
+                navigate("/listarusers");
+            }else{
+                alert("Erro ao cadastrar condutor");
+            }
         }
         else{
-            const ret = await postGerenteData({name, cpf, role, telefone,address:{cep, logradouro, bairro, cidade, estado, numero, complemento},user:{name,email,password,role}});
-            ret.status == 200?navigate("/home"):alert('Erro ao cadastrar gerente');
+        try{ res = await postGerenteData({name, cpf, role, telefone,address:{cep, logradouro, bairro, cidade, estado, numero, complemento},user:{name,email,password,role}});
+        }catch(err){
+            alert("Erro ao cadastrar gerente");
+            }
+            if(res.status === 200){
+                alert("Gerente cadastrado com sucesso");
+                navigate("/home");
+            }else{
+                alert("Erro ao cadastrar gerente");
+            }
         }
     }
     return (

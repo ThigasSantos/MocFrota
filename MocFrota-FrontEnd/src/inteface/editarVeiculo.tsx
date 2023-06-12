@@ -59,13 +59,31 @@ export function editarVeiculo() {
     };
   
     const submit = async() =>{
-      const ret = await postAtualizarVeiculoData({placa, modelo, marca, cor, ano, chassi, renavam, tipo});
-      ret.status == 200?navigate("/home"):alert('Erro ao editar veiculo');
+      let res:any;
+      try{ res = await postAtualizarVeiculoData({placa, modelo, marca, cor, ano, chassi, renavam, tipo});
+    }catch(err){
+      alert("Erro ao atualizar veiculo");
+      }
+      if(res.status === 200){
+          alert("Veiculo alterado com sucesso");
+          navigate("/listarveiculo");
+      }else{
+          alert("Erro ao atualizar veiculo");
+      }
      }
 
     const excluir = async() =>{
-        const ret = await postExcluirVeiculo({placa, modelo, marca, cor, ano, chassi, renavam, tipo});
-        ret.status == 200?navigate("/home"):alert('Erro ao excluir veiculo');
+      let res:any;
+        try{ res = await postExcluirVeiculo({placa, modelo, marca, cor, ano, chassi, renavam, tipo});
+      }catch(err){
+        alert("Erro ao excluir veiculo");
+        }
+        if(res.status === 200){
+            alert("Veiculo excluido com sucesso");
+            navigate("/listarveiculo");
+        }else{
+            alert("Erro ao excluir veiculo");
+        }
     }
   
   

@@ -9,9 +9,9 @@ export function cadastrarEmpresa() {
 
   const navigate = useNavigate();
 
-  const [cnpj, setCnpj] = useState('');
-  const [name, setNome] = useState('');
-  const [telefone, setTelefone] = useState('');
+  const [cnpj, setCnpj] = useState(null);
+  const [name, setNome] = useState(null);
+  const [telefone, setTelefone] = useState(null);
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState('');
   
@@ -99,7 +99,7 @@ export function cadastrarEmpresa() {
               <input type="text" id="password"  name="user_pass" value={telefone} onChange={handleInputTelefone} required/>
 
               <label htmlFor="pass">Email:</label>
-              <input type="text" id="password"  name="user_pass" value={email} onChange={handleInputEmail} required/>
+              <input type="text" id="password"  name="user_pass" value={email} onChange={handleInputEmail} />
 
               <label htmlFor="pass">Tipo:</label>
               <input type="text" id="password"  name="user_pass" value={status} onChange={handleInputStatus} required/>

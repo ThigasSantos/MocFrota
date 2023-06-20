@@ -25,22 +25,18 @@ const handleOpenModal = (id: number) => {
 <div className="cards">
     {isModalOpen1 && <CreateModal urlCad="/cadastroveiculo" urlEdit="/listarveiculo"/>}
     <button onClick={()=>handleOpenModal(1)}>
-
         <figure className="card">
         <img src="https://cdn-icons-png.flaticon.com/512/55/55268.png" />
         <figcaption>Menu Veiculo</figcaption>
-        </figure>
-        
+        </figure>   
     </button>
     
     {isModalOpen2 && <CreateModal urlCad="/cadastrousuario" urlEdit="/listarusers"/>}
     <button onClick={()=>handleOpenModal(2)}>
-
         <figure className="card">
         <img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png" />
         <figcaption>Menu Usuario</figcaption>
         </figure>
-
     </button>
 
     {isModalOpen3 && <CreateModal urlCad="/cadastroempresa" urlEdit="/listarempresas"/>}

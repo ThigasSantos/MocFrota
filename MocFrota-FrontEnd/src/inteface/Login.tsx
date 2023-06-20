@@ -13,12 +13,20 @@ export function Login(){
     setPassword(event.target.value);
   };
 
-    const [email, setUser] = useState("");
-    const [password, setPassword] = useState("");
+    const [email, setUser] = useState(null);
+    const [password, setPassword] = useState(null);
 
     const submit = async() =>{
-     const ret = await postData({email, password});
-     ret.status == 200?navigate("/home") : alert('Login ou senha incorretos');
+    let res:any;
+    try{ res = await postData({email, password});
+    }catch(err){
+      alert("Usuario ou senha incorretos");
+      }
+      if(res.status === 200){
+          navigate("/home");
+      }else{
+          alert("Usuario ou senha incorretos");
+      }
      
     }
 

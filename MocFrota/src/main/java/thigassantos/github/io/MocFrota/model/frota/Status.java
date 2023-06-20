@@ -22,7 +22,6 @@ public class Status {
     private Boolean farol;
     private Boolean luzFreio;
     private Boolean luzRe;
-    private Boolean placa;
     private Boolean limpador;
     private Boolean pneu;
     private Boolean estepe;
@@ -35,7 +34,6 @@ public class Status {
         this.farol = data.farol();
         this.luzFreio = data.luzFreio();
         this.luzRe = data.luzRe();
-        this.placa = data.placa();
         this.limpador = data.limpador();
         this.pneu = data.pneu();
         this.estepe = data.estepe();
@@ -49,7 +47,6 @@ public class Status {
         farol = true;
         luzFreio = true;
         luzRe = true;
-        placa = true;
         limpador = true;
         pneu = true;
         estepe = true;

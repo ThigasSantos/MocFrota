@@ -8,10 +8,10 @@ import { useNavigate, useParams } from "react-router-dom";
 
 export function cadastrarUser() {
 
-  const [name, setNome] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setSenha] = useState('');
-  const [role, setRole] = useState('');
+  const [name, setNome] = useState(null);
+  const [email, setEmail] = useState(null);
+  const [password, setSenha] = useState(null);
+  const [role, setRole] = useState(null);
 
     const handleInputNome = (event: any) => {
         setNome(event.target.value);

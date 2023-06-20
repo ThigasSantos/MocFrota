@@ -115,7 +115,7 @@ export function editarVeiculo() {
                 <input type="number" id="ano" name="vei_ano" value={ano} onChange={handleInputAno}/>
   
                 <label htmlFor="chassi">Chassi:</label>
-                <input type="text" id="chassi" name="vei_chassi" value={chassi} onChange={handleInputChassi}/>
+                <input type="text" id="chassi" name="vei_chassi" value={chassi} onChange={handleInputChassi} disabled/>
   
                 <label htmlFor="renavam">Renavam:</label>
                 <input type="text" id="renavam" name="vei_renavam" value={renavam} onChange={handleInputRenavam} required/>

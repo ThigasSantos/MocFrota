@@ -1,22 +1,26 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { getVeiculoData } from "../hooks/useVeiculoData";
+import { Card2 } from "../components/card/card";
+import { postStatusData } from "../hooks/useStatusData";
 
 export function checklist() {
 
     const navigate = useNavigate();
+    const{placa:id} = useParams();
 
-    const [placa, setPlaca] = useState('');
+    const [placa, setPlaca] = useState(id);
     const [status, setStatus] = useState('');
-    const [km, setKm] = useState('');
-    const [combustivel, setCombustivel] = useState('');
-    const [farol, setFarol] = useState('');
 
-    const [luzFreio, setLuzFreio] = useState('');
-    const [luzRe, setLuzRe] = useState('');
-    const [limpador, setLimpador] = useState('');
-    const [pneu, setPneu] = useState('');
-    const [estepe, setEstepe] = useState('');
-    const [freio, setFreio] = useState('');
+    const [km, setKm] = useState(0);
+    const [combustivel, setCombustivel] = useState(100);
+    const [farol, setFarol] = useState(false);
+    const [luzFreio, setLuzFreio] = useState(false);
+    const [luzRe, setLuzRe] = useState(false);
+    const [limpador, setLimpador] = useState(false);
+    const [pneu, setPneu] = useState(false);
+    const [estepe, setEstepe] = useState(false);
+    const [freio, setFreio] = useState(false);
 
     function handleInputPlaca(event: any) {
         setPlaca(event.target.value);
@@ -64,28 +68,15 @@ export function checklist() {
 
     const submit = async() =>{
         let res:any;
-            try{
+            try{ res = await postStatusData({placa, status, km, combustivel, farol, luzFreio, luzRe, limpador, pneu, estepe, freio});
             }catch(err){
-                alert("Erro ao atualizar empresa");
+                alert("Erro ao salvar checklist");
             }
             if(res.status === 200){
-                alert("Empresa atualizada com sucesso");
-                navigate("/listarempresas");
+                alert("Checklist cadastrada com sucesso");
+                navigate("/homeCond");
             }else{
-                alert("Erro ao atualizar empresa");}     
-    }
-
-    const excluir = async() =>{
-        let res:any;
-            try{
-            }catch(err){
-                alert("Erro ao excluir empresa");
-            }
-            if(res.status === 200){
-                alert("Empresa excluida com sucesso");
-                navigate("/listarempresas");
-            }else{
-                alert("Erro ao excluir empresa");}  
+                alert("Erro ao salvar checklist");}     
     }
 
     return (
@@ -150,8 +141,7 @@ export function checklist() {
 
             </fieldset>
            
-            <button type="button" className="btnSubmit" onClick={submit}>Atualizar</button>
-            <button type="button" className="btnSubmit" onClick={excluir}>Excluir</button>
+            <button type="button" className="btnSubmit" onClick={submit}>Salvar</button>
             
             </form>
             
@@ -161,5 +151,18 @@ export function checklist() {
         </body>
     </html></>
     )        
+}
+
+export function listarVei(){
+    const { data } = getVeiculoData();
+
+    return (
+        <div>
+            <h2><strong>Veiculos<span></span></strong></h2>
+            <div className="card-grip">
+                {data?.map(VeiculoData => <Card2 placa={VeiculoData.placa}/>)}
+            </div>
+        </div>
+    )
 }
 

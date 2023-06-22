@@ -6,7 +6,8 @@ import { cadastrarVeiculo } from './inteface/cadastrarVeiculo'
 import {editarVeiculo, listarVeiculo} from './inteface/editarVeiculo'
 import {cadastrarUser, editarUser, listarUsers} from './inteface/cadastrarUser'
 import { cadastrarEmpresa, editarEmpresa, listarEmpresa } from './inteface/cadastrarEmpresa'
-import { checklist } from './inteface/checklist'
+import { checklist, listarVei } from './inteface/checklist'
+import HomeCond from './inteface/homeCond'
 
 function App() {
   return (
@@ -23,7 +24,9 @@ function App() {
       <Route path="/cadastroempresa" Component={cadastrarEmpresa} />
       <Route path="/listarempresas" Component={listarEmpresa} />
       <Route path="/editarempresa/:cnpj" Component={editarEmpresa} />
-      <Route path="/checklist" Component={checklist} />
+      <Route path ="/homeCond" Component={HomeCond} />
+      <Route path="/checklist/:placa" Component={checklist} />
+      <Route path="/listvei" Component={listarVei} />
       </Routes>
     </Router>
   )

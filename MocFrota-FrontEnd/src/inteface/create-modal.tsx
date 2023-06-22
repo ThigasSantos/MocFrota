@@ -19,4 +19,14 @@ export function CreateModal({urlCad, urlEdit} : CreateModalProps) {
     )
 }
 
-export default CreateModal;
+export function CreateModal2({urlCad} : CreateModalProps) {
+    return (
+        <div className="modal-overlay">
+            <div className="modal-body">
+                <h2>Escolha uma opção</h2>
+                <Link to={urlCad}>Criar novo</Link>
+                <span></span>
+            </div>
+        </div>
+    )
+}

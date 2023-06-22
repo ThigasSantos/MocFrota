@@ -64,14 +64,14 @@ export function cadastrarEmpresa() {
         let res:any;
         try{res = await postEmpresaData({cnpj, name, telefone, email, status,address:{cep, logradouro, bairro, cidade, estado, numero, complemento}});
         }catch(err){
-            alert("Erro ao cadastrar usuario");
+            alert("Erro ao cadastrar empresa");
         }
 
         if(res.status === 200){
-            alert("Usuario cadastrado com sucesso");
+            alert("Empresa cadastrada com sucesso");
             navigate("/home");
         }else{
-            alert("Erro ao cadastrar usuario");
+            alert("Erro ao cadastrar empresa");
         }
         
         }

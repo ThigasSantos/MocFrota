@@ -2,7 +2,10 @@ package thigassantos.github.io.MocFrota.model.frota;
 
 import jakarta.persistence.*;
 import lombok.*;
+import thigassantos.github.io.MocFrota.model.frota.dto.StatusRequestDTO;
 import thigassantos.github.io.MocFrota.model.frota.dto.VeiculoRequestDTO;
+
+import java.util.List;
 
 @Table(name = "veiculo")
 @Entity(name = "veiculo")
@@ -22,8 +25,16 @@ public class Veiculo {
     private String chassi;
     private String renavam;
     private String tipo;
-    @OneToOne(cascade = CascadeType.ALL)
-    private Status status;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Status> status;
+
+    public void addStatus(Status status){
+        this.status.add(status);
+    }
+
+    public void addStatus(StatusRequestDTO data){
+        this.status.add(new Status(data));
+    }
 
     public Veiculo(VeiculoRequestDTO data){
         this.placa = data.placa();
@@ -34,6 +45,7 @@ public class Veiculo {
         this.chassi = data.chassi();
         this.renavam = data.renavam();
         this.tipo = data.tipo();
-        this.status = data.status();
+        this.status.add(new Status());
     }
+
 }

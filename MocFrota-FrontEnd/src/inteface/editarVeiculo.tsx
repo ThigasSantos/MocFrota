@@ -1,4 +1,4 @@
-import Card from "../../src/components/card/card";
+import {Card} from "../../src/components/card/card";
 import { getVeiculo, getVeiculoData, postAtualizarVeiculoData, postExcluirVeiculo } from "../hooks/useVeiculoData";
 import { useState } from "react";
 import "../../src/components/css/home.css";

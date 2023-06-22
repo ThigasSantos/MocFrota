@@ -1,9 +1,7 @@
 package thigassantos.github.io.MocFrota.controller;
 
-import jakarta.annotation.security.RolesAllowed;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import thigassantos.github.io.MocFrota.model.frota.Status;
 import thigassantos.github.io.MocFrota.model.frota.Veiculo;
@@ -29,12 +27,16 @@ public class FrotaController {
     public ResponseEntity saveVeiculo(@RequestBody VeiculoRequestDTO data){
         Veiculo veiculoData = new Veiculo(data);
         Status statusData = new Status();
-        veiculoData.setStatus(statusData);
+        veiculoData.addStatus(statusData);
         veiculoRepository.save(veiculoData);
         return ResponseEntity.ok().build();
     }
 
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @GetMapping@RequestMapping("/checklist")
     public ResponseEntity saveStatus(@RequestBody StatusRequestDTO data){
+        Veiculo veiculoData = veiculoRepository.findByPlaca(data.placa());
+        veiculoData.addStatus(data);
         Status statusData = new Status(data);
         statusRepository.save(statusData);
         return ResponseEntity.ok().build();

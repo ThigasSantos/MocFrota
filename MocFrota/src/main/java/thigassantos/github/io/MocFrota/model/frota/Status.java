@@ -15,6 +15,7 @@ import thigassantos.github.io.MocFrota.model.frota.dto.StatusRequestDTO;
 public class Status {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String placa;
     private String status;
     private int km;
     private int combustivel;
@@ -28,6 +29,7 @@ public class Status {
     private Boolean freio;
 
     public Status(StatusRequestDTO data){
+        this.placa = data.placa();
         this.status = data.status();
         this.km = data.km();
         this.combustivel = data.combustivel();
@@ -52,4 +54,5 @@ public class Status {
         estepe = true;
         freio = true;
     }
+
 }

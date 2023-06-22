@@ -1,6 +1,5 @@
 import axios, { AxiosError, AxiosPromise, AxiosResponse} from "axios";
 import { useQuery } from "@tanstack/react-query";
-import { EmpresaData } from "../datas/Empresa";
 import { StatusData } from "../datas/Status";
 
 const API_URL = 'http://localhost:8080'
@@ -11,8 +10,7 @@ export const postStatusData = async (data: StatusData): AxiosPromise<any> => {
 }
 
 const fetchStatus = async(placa: String): AxiosPromise<StatusData> => {
-    const response = axios.get(API_URL + '/company/buscar?placa=' +placa+ '')
-
+    const response = axios.get(API_URL + '/veiculo/buscar?placa=' +placa+ '')
     return response;
 }
 

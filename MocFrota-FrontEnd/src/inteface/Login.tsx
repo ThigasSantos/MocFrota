@@ -1,6 +1,8 @@
 import {useNavigate} from 'react-router-dom';
 import {postData } from "../../src/hooks/useLoginData";
 import { useState } from 'react';
+import jwtDecode from "jwt-decode";
+
 
 export function Login(){
 
@@ -16,19 +18,28 @@ export function Login(){
     const [email, setUser] = useState(null);
     const [password, setPassword] = useState(null);
 
-    const submit = async() =>{
-    let res:any;
-    try{ res = await postData({email, password});
-    }catch(err){
-      alert("Usuario ou senha incorretos");
+    const submit = async () => {
+      let response:any;
+      try {
+        response = await postData({ email, password });
+      } catch (err) {
+        alert("Ocorreu um erro ao fazer a requisição");
       }
-      if(res.status === 200){
-          navigate("/home");
-      }else{
-          alert("Usuario ou senha incorretos");
-      }
-     
-    }
+
+        if (response.status === 200) {
+          const token = response.data; // Obtenha o token JWT retornado pelo backend
+          localStorage.setItem("app-token", token); // Armazene o token JWT no localStorage
+          const decodedToken:any = jwtDecode(token); // Decodifique o token JWT
+          const role = decodedToken.role; // Obtenha a role do usuário
+          if(role === "Gerente")
+            navigate("/home");
+          else
+            navigate("/homeCond");  
+        } else {
+          alert("Usuário ou senha incorretos");
+        }
+      
+    };
 
     return (
         <>
@@ -65,5 +76,3 @@ export function Login(){
         </html></>
         )
 }
-
-export default Login;

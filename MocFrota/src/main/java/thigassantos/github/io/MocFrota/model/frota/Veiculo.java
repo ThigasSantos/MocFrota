@@ -5,6 +5,7 @@ import lombok.*;
 import thigassantos.github.io.MocFrota.model.frota.dto.StatusRequestDTO;
 import thigassantos.github.io.MocFrota.model.frota.dto.VeiculoRequestDTO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Table(name = "veiculo")
@@ -26,7 +27,7 @@ public class Veiculo {
     private String renavam;
     private String tipo;
     @OneToMany(cascade = CascadeType.ALL)
-    private List<Status> status;
+    private List<Status> status = new ArrayList<Status>();
 
     public void addStatus(Status status){
         this.status.add(status);
@@ -45,7 +46,7 @@ public class Veiculo {
         this.chassi = data.chassi();
         this.renavam = data.renavam();
         this.tipo = data.tipo();
-        this.status.add(new Status());
+        this.status.add(new Status(data.placa()));
     }
 
 }

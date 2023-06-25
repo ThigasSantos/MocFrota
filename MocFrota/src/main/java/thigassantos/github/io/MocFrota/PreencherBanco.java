@@ -27,7 +27,7 @@ public class PreencherBanco {
     }
 
     public void preencheBanco(){
-        StatusRequestDTO status11 = new StatusRequestDTO("ABC-1234","sos" ,32, 55, false, false, false, false, false, false, false);
+        StatusRequestDTO status11 = new StatusRequestDTO("ABC-1234","Em Aberto" , "Ida",32, 55, false, false, false, false, false, false, false);
         Status status1 = new Status(status11);
         Status status2 = new Status(status11);
         Status status3 = new Status(status11);

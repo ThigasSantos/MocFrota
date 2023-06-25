@@ -144,3 +144,10 @@ label.light {
   color: #ffffff;
   margin-bottom: 3vh;
 }
+
+.title-checklist{
+  font-size: 20px;
+  color: #ffffff;
+  margin-bottom: 3vh;
+  display: grid;
+}

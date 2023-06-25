@@ -30,3 +30,16 @@ export function CreateModal2({urlCad} : CreateModalProps) {
         </div>
     )
 }
+
+export function CreateModal3({urlCad, urlEdit} : CreateModalProps) {
+    return (
+        <div className="modal-overlay">
+            <div className="modal-body">
+                <h2>Escolha uma opção</h2>
+                <Link to={urlCad}>Aprovar CheckList</Link>
+                <Link to={urlEdit}>Solicitar Manutenção</Link>
+                <span></span>
+            </div>
+        </div>
+    )
+}

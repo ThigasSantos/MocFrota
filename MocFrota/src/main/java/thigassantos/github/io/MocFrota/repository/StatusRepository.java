@@ -11,5 +11,5 @@ import thigassantos.github.io.MocFrota.model.frota.Veiculo;
 @EnableJpaRepositories
 @Repository
 public interface StatusRepository extends JpaRepository<Status, Long> {
-    Status findById(long id);
+
 }

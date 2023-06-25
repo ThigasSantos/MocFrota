@@ -1,27 +1,27 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { getVeiculoData } from "../hooks/useVeiculoData";
-import { Card2 } from "../components/card/card";
-import { postStatusData } from "../hooks/useStatusData";
+import { getStatus, getStatusAlter, getStatusData, postStatusData, postUpdateStatusData } from "../hooks/useStatusData";
+import { ListCheck } from "../components/list/list";
 
-export function checklist() {
+export function aprovarChecklist() {
 
     const navigate = useNavigate();
-    const{placa:id} = useParams();
+    const{id} = useParams();
+    const {data} = getStatusAlter(id)||{data:undefined};
 
-    const [placa, setPlaca] = useState(id);
-    const [status, setStatus] = useState("Aberto");
-    const [estado, setEstado] = useState('');
+    const [placa, setPlaca] = useState(data?.placa);
+    const [status, setStatus] = useState(data?.status);
+    const [estado, setEstado] = useState(data?.estado);
 
-    const [km, setKm] = useState(0);
-    const [combustivel, setCombustivel] = useState(100);
-    const [farol, setFarol] = useState(false);
-    const [luzFreio, setLuzFreio] = useState(false);
-    const [luzRe, setLuzRe] = useState(false);
-    const [limpador, setLimpador] = useState(false);
-    const [pneu, setPneu] = useState(false);
-    const [estepe, setEstepe] = useState(false);
-    const [freio, setFreio] = useState(false);
+    const [km, setKm] = useState(data?.km);
+    const [combustivel, setCombustivel] = useState(data?.combustivel);
+    const [farol, setFarol] = useState(data?.farol);
+    const [luzFreio, setLuzFreio] = useState(data?.luzFreio);
+    const [luzRe, setLuzRe] = useState(data?.luzRe);
+    const [limpador, setLimpador] = useState(data?.limpador);
+    const [pneu, setPneu] = useState(data?.pneu);
+    const [estepe, setEstepe] = useState(data?.estepe);
+    const [freio, setFreio] = useState(data?.freio);
 
     function handleInputPlaca(event: any) {
         setPlaca(event.target.value);
@@ -73,15 +73,15 @@ export function checklist() {
 
     const submit = async() =>{
         let res:any;
-            try{ res = await postStatusData({placa, status, estado, km, combustivel, farol, luzFreio, luzRe, limpador, pneu, estepe, freio});
+            try{ res = await postUpdateStatusData({id:data?.id, placa, status:"Fechado", estado, km, combustivel, farol, luzFreio, luzRe, limpador, pneu, estepe, freio});
             }catch(err){
                 alert("Erro ao salvar checklist");
             }
             if(res.status === 200){
-                alert("Checklist cadastrada com sucesso");
-                navigate("/homeCond");
+                alert("Checklist aprovada com sucesso");
+                navigate("/listchecklist");
             }else{
-                alert("Erro ao salvar checklist");}     
+                alert("Erro ao aprovar checklist");}     
     }
 
     return (
@@ -97,7 +97,10 @@ export function checklist() {
               <legend><span className="number">1</span> Informações Básicas </legend>
             
               <label htmlFor="nome">Placa:</label>
-              <input type="text" id="name" name="user_nome" value={placa} onChange={handleInputPlaca} disabled />  
+              <input type="text" id="name" name="user_nome" value={placa} onChange={handleInputPlaca} disabled />
+
+              <label htmlFor="nome">Status:</label>
+              <input type="text" id="name" name="user_nome" value={status} onChange={handleInputStatus} disabled />  
             
               <label htmlFor="tipo">Tipo de CheckList:</label>
               <select id="tipo" name="vei_tipo" value={estado} onChange={handleInputEstado}>
@@ -150,7 +153,8 @@ export function checklist() {
 
             </fieldset>
            
-            <button type="button" className="btnSubmit" onClick={submit}>Salvar</button>
+            <button type="button" className="btnSubmit" onClick={submit}>Encerrar CheckList</button>
+            <button type="button" className="btnSubmit" onClick={submit}>Abrir Manutenção</button>
             
             </form>
             
@@ -162,16 +166,53 @@ export function checklist() {
     )        
 }
 
-export function listarVei(){
-    const { data } = getVeiculoData();
+export function listarCheckList(){
+    const { data } = getStatusData();
 
     return (
         <div>
-            <h2><strong>Veiculos<span></span></strong></h2>
-            <div className="card-grip">
-                {data?.map(VeiculoData => <Card2 placa={VeiculoData.placa}/>)}
+            <h2><strong>CheckLists<span></span></strong></h2>
+            <div className="title-checklist">
+                <h2><strong>Em aberto<span></span></strong></h2>
+                    <div className="card-grip">
+                    { 
+                    data?.map(StatusDataAll => {
+                        // Verificar o valor da propriedade "status"
+                        if (StatusDataAll.status === "Aberto") {
+                        // Redirecionar para a página adequada com base no valor de "status"
+                        console.log(StatusDataAll.id);
+                        
+                    return (
+                    <ListCheck id={StatusDataAll.id} placa={StatusDataAll.placa} data={StatusDataAll.data} status={StatusDataAll.status}/>);
+                    }return null; // Não renderizar se o "status" não for "Aberto"
+                    })}
+                    </div>
+                <h2><strong>Encerrado<span></span></strong></h2>
+                    <div className="card-grip">
+                    { 
+                    data?.map(StatusDataAll => {
+                        // Verificar o valor da propriedade "status"
+                        if (StatusDataAll.status === "Fechado") {
+                        // Redirecionar para a página adequada com base no valor de "status"
+                    return (
+                    <ListCheck id={StatusDataAll.id} placa={StatusDataAll.placa} data={StatusDataAll.data} status={StatusDataAll.status}/>);
+                    }return null; // Não renderizar se o "status" não for "Fechado"
+                    })}
+                    </div>
+                <h2><strong>Em Manutenção<span></span></strong></h2>
+                    <div className="card-grip">
+                    { 
+                    data?.map(StatusDataAll => {
+                        // Verificar o valor da propriedade "status"
+                        if (StatusDataAll.status === "Maintence") {
+                        // Redirecionar para a página adequada com base no valor de "status"
+                    return (
+                    <ListCheck id={StatusDataAll.id} placa={StatusDataAll.placa} data={StatusDataAll.data} status={StatusDataAll.status}/>);
+                    }return null; // Não renderizar se o "status" não for "Maintance"
+                    })}
+                    </div>   
             </div>
+            
         </div>
     )
 }
-

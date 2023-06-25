@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import '../../src/components/css/home.css'
-import { CreateModal } from './create-modal';
+import { CreateModal, CreateModal3 } from './create-modal';
 
 export function Home(){
 const [isModalOpen1, setIsModalOpen] = useState(false);
 const [isModalOpen2, setIsModalOpen2] = useState(false);
 const [isModalOpen3, setIsModalOpen3] = useState(false);
+const [isModalOpen4, setIsModalOpen4] = useState(false);
 const handleOpenModal = (id: number) => {
     if(id == 1){
         setIsModalOpen((prev: any) => !prev);
@@ -13,6 +14,8 @@ const handleOpenModal = (id: number) => {
         setIsModalOpen2((prev: any) => !prev);
     }else if(id == 3){
         setIsModalOpen3((prev: any) => !prev);
+    }else if(id == 4){
+        setIsModalOpen4((prev: any) => !prev);
     }
 }
 
@@ -44,6 +47,14 @@ const handleOpenModal = (id: number) => {
         <figure className="card">
         <img src="https://i.pinimg.com/originals/6b/7f/48/6b7f48367fd42e6cbc05e3637cbbeba3.png" />
         <figcaption>Menu Empresas</figcaption>
+        </figure>
+    </button>
+
+    {isModalOpen4 && <CreateModal3 urlCad="/listchecklist" urlEdit="/listarempresas"/>}
+    <button onClick={()=>handleOpenModal(4)}>
+        <figure className="card">
+        <img src="https://cdn-icons-png.flaticon.com/512/104/104090.png" />
+        <figcaption>Menu CheckList</figcaption>
         </figure>
     </button>
     

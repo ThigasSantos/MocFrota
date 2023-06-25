@@ -13,7 +13,7 @@ public class TokenService {
 
     public String generateToken(User user) {
         return JWT.create()
-                .withSubject(user.getEmail()).withClaim("id", user.getId())
+                .withSubject(user.getEmail()).withClaim("id", user.getId()).withClaim("role", user.getRole())
                 .withExpiresAt(new Date(System.currentTimeMillis() + 1 * 60 * 1000))
                 .sign(Algorithm.HMAC256("secret"));
     }

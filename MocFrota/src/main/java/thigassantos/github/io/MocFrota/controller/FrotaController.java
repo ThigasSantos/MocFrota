@@ -26,7 +26,7 @@ public class FrotaController {
     @PostMapping@RequestMapping("/cadastrar")
     public ResponseEntity saveVeiculo(@RequestBody VeiculoRequestDTO data){
         Veiculo veiculoData = new Veiculo(data);
-        Status statusData = new Status();
+        Status statusData = new Status(veiculoData.getPlaca());
         veiculoData.addStatus(statusData);
         veiculoRepository.save(veiculoData);
         return ResponseEntity.ok().build();

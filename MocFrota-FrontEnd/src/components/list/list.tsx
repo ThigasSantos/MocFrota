@@ -22,6 +22,17 @@ interface CnpjProps{
     cnpj: string
 }
 
+interface ListPropsC{
+    id: number
+    placa: string
+    data: string
+    status: string
+}
+
+interface IdProps{ 
+    id: number
+}
+
 export function ListU({name, cpf, role} : ListProps){
     const navigate = useNavigate();
 
@@ -58,3 +69,20 @@ export function ListV({cnpj, name, telefone, status} : ListPropsV){
     </div>  )  
 }
 
+export function ListCheck({id, placa, data, status} : ListPropsC){
+
+    const navigate = useNavigate();
+    
+    const submit = async({id}: IdProps) =>{
+        navigate('/updatechecklist/'+id);
+    }
+
+    return(<div className="border"> 
+    <button className="buttonUser" onClick={()=>submit({id})}>
+        <div className='header'>{id}</div>
+        <div className="list-users">
+            <div className='content'>Veiculo: {placa}  Data: {data}</div>       
+        </div>
+    </button>
+    </div> )
+}

@@ -8,6 +8,7 @@ import {cadastrarUser, editarUser, listarUsers} from './inteface/cadastrarUser'
 import { cadastrarEmpresa, editarEmpresa, listarEmpresa } from './inteface/cadastrarEmpresa'
 import { checklist, listarVei } from './inteface/checklist'
 import HomeCond from './inteface/homeCond'
+import { aprovarChecklist, listarCheckList } from './inteface/menuChecklist'
 
 function App() {
   return (
@@ -27,6 +28,8 @@ function App() {
       <Route path ="/homeCond" Component={HomeCond} />
       <Route path="/checklist/:placa" Component={checklist} />
       <Route path="/listvei" Component={listarVei} />
+      <Route path="/listchecklist" Component={listarCheckList} />
+      <Route path="/updatechecklist/:id" Component={aprovarChecklist} />
       </Routes>
     </Router>
   )
